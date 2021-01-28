@@ -47,9 +47,10 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 class SidebarWidgetSelection;
 class SimCenterWidget;
 class InputWidgetFEM;
-class InputWidgetUQ;
+class UQ_EngineSelection;
+class InputWidgetEDP;
 class InputWidgetParameters;
-class DakotaResults;
+class UQ_Results;
 
 class AgaveCurl;
 class RemoteJobCreator;
@@ -59,6 +60,7 @@ class QLabel;
 class QThread;
 class QNetworkAccessManager;
 class QNetworkReply;
+class SimCenterPreferences;
 
 class MainWindow : public QMainWindow
 {
@@ -70,6 +72,7 @@ class MainWindow : public QMainWindow
 
   QLabel *errorLabel;
 
+
 signals:
     void attemptLogin(QString, QString);
     void logout();
@@ -79,7 +82,6 @@ signals:
     void open();
     bool save();
     bool saveAs();
-
 
     void onRunButtonClicked();
     void onRemoteRunButtonClicked();
@@ -92,25 +94,30 @@ signals:
     void attemptLoginReturn(bool);
     void logoutReturn(bool);
 
-    void onDakotaMethodChanged(void);
+    void onUQ_EngineChanged(bool);
 
     void errorMessage(QString message);
     void fatalMessage(QString message);
-
-  //void selectionChangedSlot(const QItemSelection &, const QItemSelection &);
 
     bool saveFile(const QString &fileName);
     void loadFile(const QString &fileName);
     void processResults(QString &filename1, QString & filename2);
 
-
     void about();
+    void manual();
     void submitFeedback();
     void version();
+    void preferences();
     void copyright();
+    void cite();
 
  private:
     void setCurrentFile(const QString &fileName);
+    int runApplication(QString app, QStringList args);
+
+    bool outputToJSON(QJsonObject &rvObject);
+    bool inputFromJSON(QJsonObject &rvObject);
+
     void createActions();
 
     //Ui::MainWindow *ui;
@@ -119,14 +126,14 @@ signals:
     SidebarWidgetSelection *inputWidget;
 
     InputWidgetFEM *fem;
-    InputWidgetUQ *uq;
+    UQ_EngineSelection *uq;
     InputWidgetParameters *random;
-    DakotaResults *results;
+    UQ_Results *results;
+    InputWidgetEDP *edp;
 
     AgaveCurl *theRemoteInterface;
     RemoteJobCreator *jobCreator;
     RemoteJobManager *jobManager;
-
 
     bool loggedIn;
     QWidget *loginWindow;            // popup window for when login clicked
@@ -135,9 +142,12 @@ signals:
     int numTries;
     QPushButton *loginButton;         // login button on main screen
     QPushButton *loginSubmitButton;   // submit button on login screen
-
+    QPushButton *runDesignSafeButton;
     QThread *thread;
     QNetworkAccessManager *manager;
+
+    SimCenterPreferences *thePreferences;
+    QString workingDirectory;
 };
 
 #endif // MAINWINDOW_H

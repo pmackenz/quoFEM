@@ -39,10 +39,24 @@ moc*
 
 # QT
 uqFEM.pro.user
+.qmake.stash
 
 # application
 *.tmp
 *.out
-*.json
+# *.json
+
+# build folder
+applications/out/build/*
 
 Makefile
+*.pro.user
+simCenterSub
+simCenterDprepro
+createOpenSeesDriver
+createOpenSeesPyDriver
+createFeapDriver
+nataf_gsa
+preprocessDakota
+
+.vs/

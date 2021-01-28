@@ -36,6 +36,9 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 // Written: fmckenna
 
+// added and modified: padhye
+
+
 #include "DakotaResultsBayesianCalibration.h"
 #include <QJsonObject>
 #include <QJsonArray>
@@ -67,13 +70,15 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 using namespace QtCharts;
 #include <math.h>
 #include <QValueAxis>
+#include <QPushButton>
+#include <QFileDialog>
 
 #include <QXYSeries>
 
 #define NUM_DIVISIONS 10
 
-DakotaResultsBayesianCalibration::DakotaResultsBayesianCalibration(QWidget *parent)
-    : DakotaResults(parent)
+DakotaResultsBayesianCalibration::DakotaResultsBayesianCalibration(int numBurn, QWidget *parent)
+    : UQ_Results(parent)
 {
     // title & add button
     tabWidget = new QTabWidget(this);
@@ -81,6 +86,53 @@ DakotaResultsBayesianCalibration::DakotaResultsBayesianCalibration(QWidget *pare
     mLeft = true;
     col1 = 0;
     col2 = 0;
+    burnInSamples = numBurn;
+
+    summary = new QWidget();
+    summaryLayout = new QVBoxLayout();
+    summaryLayout->setContentsMargins(0,0,0,0);
+    summary->setLayout(summaryLayout);
+    tabWidget->addTab(summary,tr("Summary"));
+
+    dakotaText = new QTextEdit();
+    dakotaText->setReadOnly(true); // make it so user cannot edit the contents
+    tabWidget->addTab(dakotaText, tr("General"));
+
+
+     spreadsheet = new MyTableWidget();
+     spreadsheet->setEditTriggers(QAbstractItemView::NoEditTriggers);
+     connect(spreadsheet,SIGNAL(cellPressed(int,int)),this,SLOT(onSpreadsheetCellClicked(int,int)));
+
+     spreadsheet->setEditTriggers(QAbstractItemView::NoEditTriggers);
+     connect(spreadsheet,SIGNAL(cellPressed(int,int)),this,SLOT(onSpreadsheetCellClicked(int,int)));
+
+     chart = new QChart();
+     chart->setAnimationOptions(QChart::AllAnimations);
+
+     QChartView *chartView = new QChartView(chart);
+     chartView->setRenderHint(QPainter::Antialiasing);
+     chartView->chart()->legend()->hide();
+
+     //
+     // create a widget into which we place the chart and the spreadsheet
+     //
+
+     QWidget *widget = new QWidget();
+     QGridLayout *layout = new QGridLayout(widget);
+     QPushButton* save_spreadsheet = new QPushButton();
+     save_spreadsheet->setText("Save Data");
+     save_spreadsheet->setToolTip(tr("Save data into file in a CSV format"));
+     save_spreadsheet->resize(30,30);
+     connect(save_spreadsheet,SIGNAL(clicked()),this,SLOT(onSaveSpreadsheetClicked()));
+
+     layout->setContentsMargins(0,0,0,0);
+     layout->setSpacing(3);
+
+     layout->addWidget(chartView, 0,0,1,1);
+     layout->addWidget(save_spreadsheet,1,0,Qt::AlignLeft);
+     layout->addWidget(spreadsheet,2,0,1,1);
+
+     tabWidget->addTab(widget, tr("Data Values"));
 }
 
 DakotaResultsBayesianCalibration::~DakotaResultsBayesianCalibration()
@@ -91,6 +143,7 @@ DakotaResultsBayesianCalibration::~DakotaResultsBayesianCalibration()
 
 void DakotaResultsBayesianCalibration::clear(void)
 {
+    /*
     QWidget *res=tabWidget->widget(0);
     QWidget *gen=tabWidget->widget(0);
     QWidget *dat=tabWidget->widget(0);
@@ -99,6 +152,10 @@ void DakotaResultsBayesianCalibration::clear(void)
     delete dat;
     delete gen;
     delete res;
+    */
+
+    spreadsheet->clear();
+    dakotaText->clear();
 }
 
 
@@ -107,6 +164,7 @@ bool
 DakotaResultsBayesianCalibration::outputToJSON(QJsonObject &jsonObject)
 {
     bool result = true;
+
     int numEDP = theNames.count();
 
     // quick return .. noEDP -> no analysis done -> no results out
@@ -128,7 +186,6 @@ DakotaResultsBayesianCalibration::outputToJSON(QJsonObject &jsonObject)
         resultsData.append(edpData);
     }
     jsonObject["summary"]=resultsData;
-
 
     // add general data
     jsonObject["general"]=dakotaText->toPlainText();
@@ -171,18 +228,16 @@ DakotaResultsBayesianCalibration::outputToJSON(QJsonObject &jsonObject)
 bool
 DakotaResultsBayesianCalibration::inputFromJSON(QJsonObject &jsonObject)
 {
+    bool result = true;
     this->clear();
 
-    bool result = true;
+     if (!jsonObject.contains("summary")) {
+        return true;
+     }
 
     //
     // create a summary widget in which place basic output (name, mean, stdDev)
     //
-
-    QWidget *summary = new QWidget();
-    QVBoxLayout *summaryLayout = new QVBoxLayout();
-    summaryLayout->setContentsMargins(0,0,0,0);
-    summary->setLayout(summaryLayout);
 
     QJsonArray edpArray = jsonObject["summary"].toArray();
     foreach (const QJsonValue &edpValue, edpArray) {
@@ -207,8 +262,6 @@ DakotaResultsBayesianCalibration::inputFromJSON(QJsonObject &jsonObject)
     // into a QTextEdit place more detailed Dakota text
     //
 
-    dakotaText = new QTextEdit();
-    dakotaText->setReadOnly(true); // make it so user cannot edit the contents
     QJsonValue theValue = jsonObject["general"];
     dakotaText->setText(theValue.toString());
 
@@ -216,7 +269,6 @@ DakotaResultsBayesianCalibration::inputFromJSON(QJsonObject &jsonObject)
     // into a spreadsheet place all the data returned
     //
 
-    spreadsheet = new MyTableWidget();
     QJsonObject spreadsheetData = jsonObject["spreadsheet"].toObject();
     int numRow = spreadsheetData["numRow"].toInt();
     int numCol = spreadsheetData["numCol"].toInt();
@@ -239,44 +291,15 @@ DakotaResultsBayesianCalibration::inputFromJSON(QJsonObject &jsonObject)
             dataCount++;
         }
     }
-    spreadsheet->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    connect(spreadsheet,SIGNAL(cellPressed(int,int)),this,SLOT(onSpreadsheetCellClicked(int,int)));
 
     //
     // create a chart, setting data points from first and last col of spreadsheet
     //
 
-    chart = new QChart();
-    chart->setAnimationOptions(QChart::AllAnimations);
-    QScatterSeries *series = new QScatterSeries;
     col1 = 0;
     col2 = numCol-1;
     mLeft = true;
-
     this->onSpreadsheetCellClicked(0,numCol-1);
-
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-    chartView->chart()->legend()->hide();
-
-    //
-    // create a widget into which we place the chart and the spreadsheet
-    //
-
-    QWidget *widget = new QWidget();
-    QVBoxLayout *layout = new QVBoxLayout(widget);
-    layout->setContentsMargins(0,0,0,0);
-    layout->setSpacing(3);
-    layout->addWidget(chartView, 1);
-    layout->addWidget(spreadsheet, 1);
-
-    //
-    // add 3 Widgets to TabWidget
-    //
-
-    tabWidget->addTab(summary,tr("Summmary"));
-    tabWidget->addTab(dakotaText, tr("General"));
-    tabWidget->addTab(widget, tr("Data Values"));
 
     tabWidget->adjustSize();
     return result;
@@ -333,24 +356,6 @@ static int mergesort(double *input, int size)
 }
 
 int DakotaResultsBayesianCalibration::processResults(QString &filenameResults, QString &filenameTab) {
-
-    //
-    // get a Qwidget ready to place summary data, the EDP name, mean, stdDev into
-    //
-
-    QWidget *summary = new QWidget();
-    QVBoxLayout *summaryLayout = new QVBoxLayout();
-    summaryLayout->setContentsMargins(0,0,0,0);
-    summary->setLayout(summaryLayout);
-
-    //
-    // into a QTextEdit we will place contents of Dakota more detailed output
-    //
-
-    dakotaText = new QTextEdit();
-    dakotaText->setReadOnly(true); // make it so user cannot edit the contents
-
-    dakotaText->setText("\n");
 
     //
     // open Dakota output file
@@ -421,8 +426,6 @@ int DakotaResultsBayesianCalibration::processResults(QString &filenameResults, Q
     // now into a QTableWidget copy the random variable and edp's of each black box run
     //
 
-    spreadsheet = new MyTableWidget();
-
     // open file containing tab data
     std::ifstream tabResults(filenameTab.toStdString().c_str());
     if (!tabResults.is_open()) {
@@ -475,41 +478,7 @@ int DakotaResultsBayesianCalibration::processResults(QString &filenameResults, Q
     }
     tabResults.close();
 
-   // rowCount;
-    spreadsheet->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    connect(spreadsheet,SIGNAL(cellPressed(int,int)),this,SLOT(onSpreadsheetCellClicked(int,int)));
-
-    //
-    // create a chart, setting data points from first and last col of spreadsheet
-    //
-
-    chart = new QChart();
-    chart->setAnimationOptions(QChart::AllAnimations);
-
     this->onSpreadsheetCellClicked(0,colCount-1);
-
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-    chartView->chart()->legend()->hide();
-
-    //
-    // into QWidget place chart and spreadsheet
-    //
-
-    QWidget *widget = new QWidget();
-    QVBoxLayout *layout = new QVBoxLayout(widget);
-    layout->setContentsMargins(0,0,0,0);
-    layout->setSpacing(3);
-    layout->addWidget(chartView, 1);
-    layout->addWidget(spreadsheet, 1);
-
-    //
-    // add summary, detained info and spreadsheet with chart to the tabed widget
-    //
-
-    tabWidget->addTab(summary,tr("Summmary"));
-    tabWidget->addTab(dakotaText, tr("General"));
-    tabWidget->addTab(widget, tr("Data Values"));
 
     tabWidget->adjustSize();
 
@@ -547,6 +516,29 @@ DakotaResultsBayesianCalibration::onSpreadsheetCellClicked(int row, int col)
     if (col1 != col2) {
         QScatterSeries *series = new QScatterSeries;
 
+        // adjust marker size and opacity based on the number of samples
+        if (rowCount < 10) {
+            series->setMarkerSize(15.0);
+            series->setColor(QColor(0, 114, 178, 200));
+        } else if (rowCount < 100) {
+            series->setMarkerSize(11.0);
+            series->setColor(QColor(0, 114, 178, 160));
+        } else if (rowCount < 1000) {
+            series->setMarkerSize(8.0);
+            series->setColor(QColor(0, 114, 178, 100));
+        } else if (rowCount < 10000) {
+            series->setMarkerSize(6.0);
+            series->setColor(QColor(0, 114, 178, 70));
+        } else if (rowCount < 100000) {
+            series->setMarkerSize(5.0);
+            series->setColor(QColor(0, 114, 178, 50));
+        } else {
+            series->setMarkerSize(4.5);
+            series->setColor(QColor(0, 114, 178, 30));
+        }
+        
+        series->setBorderColor(QColor(255,255,255,0));
+
         for (int i=0; i<rowCount; i++) {
             QTableWidgetItem *itemX = spreadsheet->item(i,col1);
             QTableWidgetItem *itemY = spreadsheet->item(i,col2);
@@ -563,6 +555,75 @@ DakotaResultsBayesianCalibration::onSpreadsheetCellClicked(int row, int col)
 
         axisX->setTitleText(theHeadings.at(col1));
         axisY->setTitleText(theHeadings.at(col2));
+
+        // padhye adding ranges 8/25/2018
+        // finding the range for X and Y axis
+        // now the axes will look a bit clean.
+
+        double minX, maxX;
+        double minY, maxY;
+
+        for (int i=0; i<rowCount; i++) {
+
+            QTableWidgetItem *itemX = spreadsheet->item(i,col1);
+            QTableWidgetItem *itemY = spreadsheet->item(i,col2);
+
+            double value1 = itemX->text().toDouble();
+
+            double value2 = itemY->text().toDouble();
+
+
+            if (i == 0) {
+                minX=value1;
+                maxX=value1;
+                minY=value2;
+                maxY=value2;
+                        }
+            if(value1<minX){minX=value1;}
+            if(value1>maxX){maxX=value1;}
+
+            if(value2<minY){minY=value2;}
+            if(value2>maxY){maxY=value2;}
+
+        }
+
+        double xRange=maxX-minX;
+        double yRange=maxY-minY;
+
+        // if value is constant, adjust axes
+        if (minX==maxX) {
+            double axisMargin=abs(minX)*0.1;
+            minX=minX-axisMargin;
+            maxX=maxX+axisMargin;
+        }
+        if (minY==maxY) {
+            double axisMargin=abs(minY)*0.1;
+            minY=minY-axisMargin;
+            maxY=maxY+axisMargin;
+        }
+
+      //  qDebug()<<"\n the value of xRange is     ";
+        //qDebug()<<xRange;
+
+        //qDebug()<<"\n the value of yRange is     ";
+        //qDebug()<<yRange;
+
+        // if the column is not the run number, i.e., 0 column, then adjust the x-axis differently
+
+        if(col1!=0)
+        {
+        axisX->setRange(minX - 0.01*xRange, maxX + 0.1*xRange);
+        }
+        else{
+
+        axisX->setRange(int (minX - 1), int (maxX +1));
+       // axisX->setTickCount(1);
+
+        }
+
+        // adjust y with some fine precision
+        axisY->setRange(minY - 0.1*yRange, maxY + 0.1*yRange);
+
 
         chart->setAxisX(axisX, series);
         chart->setAxisY(axisY, series);
@@ -664,6 +725,38 @@ DakotaResultsBayesianCalibration::onSpreadsheetCellClicked(int row, int col)
     }
 }
 
+void
+DakotaResultsBayesianCalibration::onSaveSpreadsheetClicked()
+{
+
+    int rowCount = spreadsheet->rowCount();
+    int columnCount = spreadsheet->columnCount();
+
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Save Data"), "",
+                                                    tr("All Files (*)"));
+
+    QFile file(fileName);
+    if (file.open(QIODevice::ReadWrite))
+    {
+        QTextStream stream(&file);
+        for (int j=0; j<columnCount; j++)
+        {
+            stream <<theHeadings.at(j)<<", ";
+        }
+        stream <<endl;
+        for (int i=0; i<rowCount; i++)
+        {
+            for (int j=0; j<columnCount; j++)
+            {
+                QTableWidgetItem *item_value = spreadsheet->item(i,j);
+                double value = item_value->text().toDouble();
+                stream << value << ", ";
+            }
+            stream<<endl;
+        }
+    }
+}
 
 extern QWidget *addLabeledLineEdit(QString theLabelName, QLineEdit **theLineEdit);
 
