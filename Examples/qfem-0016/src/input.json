@@ -1,0 +1,113 @@
+{
+    "Applications": {
+        "FEM": {
+            "Application": "OpenSees",
+            "ApplicationData": {
+                "MS_Path": "{Current_Dir}/",
+                "PS_Path": "{Current_Dir}/",
+                "mainScript": "ShearBuilding_NL.tcl",
+                "postprocessScript": "postprocess.tcl"
+            }
+        },
+        "UQ": {
+            "Application": "SimCenter-UQ",
+            "ApplicationData": {
+            }
+        }
+    },
+    "EDP": [
+        {
+            "length": 1,
+            "name": "Node_2_Disp_1_Mean",
+            "type": "scalar"
+        },
+        {
+            "length": 1,
+            "name": "Node_2_Disp_1_Std",
+            "type": "scalar"
+        }
+    ],
+    "FEM": {
+    },
+    "UQ": {
+        "surrogateMethodInfo": {
+            "DoEmethod": "None",
+            "accuracyLimit": 0.02,
+            "advancedOpt": true,
+            "existingDoE": false,
+            "initialDoE": 0,
+            "inpFile": "NA",
+            "kernel": "Matern 5/2",
+            "linear": true,
+            "logTransform": true,
+            "method": "Sampling and Simulation",
+            "nuggetOpt": "Optimize",
+            "nuggetString": "",
+            "outFile": "NA",
+            "parallelExecution": true,
+            "samples": 50,
+            "seed": 32,
+            "timeLimit": 20
+        },
+        "uqEngine": "SimCenterUQ",
+        "uqType": "Train GP Surrogate Model"
+    },
+    "isSurrogate": true,
+    "localAppDir": "C:/Users/SimCenter/Sangri/SimCenterBackendApplications",
+    "randomVariables": [
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 50,
+            "name": "w",
+            "refCount": 1,
+            "upperbound": 150,
+            "value": "RV.w",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 40,
+            "name": "wR",
+            "refCount": 1,
+            "upperbound": 80,
+            "value": "RV.wR",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 240,
+            "name": "k",
+            "refCount": 1,
+            "upperbound": 360,
+            "value": "RV.k",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.05,
+            "name": "alp",
+            "refCount": 1,
+            "upperbound": 0.15,
+            "value": "RV.alp",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 18,
+            "name": "Fy",
+            "refCount": 1,
+            "upperbound": 22,
+            "value": "RV.Fy",
+            "variableClass": "Uniform"
+        }
+    ],
+    "remoteAppDir": "C:/Users/SimCenter/Sangri/SimCenterBackendApplications",
+    "resultType": "SimCenterUQResultsSurrogate",
+    "runType": "runningLocal",
+    "workingDir": "C:/Users/SimCenter/Documents/quoFEM/LocalWorkDir"
+}

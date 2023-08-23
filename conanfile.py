@@ -9,15 +9,13 @@ class quoFEM(ConanFile):
     description = "NHERI SimCenter R2D Tool"
     settings = "os", "compiler", "build_type", "arch"
     generators = "qmake"
-    requires = "jansson/2.11@bincrafters/stable", \
-               "zlib/1.2.11@conan/stable", \
-               "libcurl/7.64.1@bincrafters/stable"
+    requires = "jansson/2.13.1", \
+               "zlib/1.2.11", \
+               "libcurl/7.72.0"
     build_policy = "missing"
 
     def configure(self):
         if self.settings.os == "Windows":
-            self.options["libcurl"].with_winssl = True
-            self.options["libcurl"].with_openssl = False
             self.options["lapack"].visual_studio = True
             self.options["lapack"].shared = True
 

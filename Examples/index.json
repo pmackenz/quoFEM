@@ -1,0 +1,574 @@
+{
+  "items": {
+    "qfem-0001": {
+      "id": "qfem-0001",
+      "title": "Two-Dimensional Truss: Sampling, Reliability and Sensitivity",
+      "base": "qfem-0001",
+      "doc": [
+        "qfem-0001/figures/trussRES5.png",
+        "qfem-0001/figures/trussSens-UQ.png",
+        "qfem-0001/figures/trussRES2.png",
+        "qfem-0001/figures/trussSensitivity-RES.png",
+        "qfem-0001/figures/trussQoI.png",
+        "qfem-0001/../qfem-0001/src/TrussModel.tcl",
+        "qfem-0001/figures/trussRES1.png",
+        "qfem-0001/figures/truss.png",
+        "qfem-0001/figures/trussSORM-UQ.png",
+        "qfem-0001/figures/trussSORM-RES.png",
+        "qfem-0001/../qfem-0001/src/TrussPost.tcl",
+        "qfem-0001/figures/trussRV.png",
+        "qfem-0001/../qfem-0001/src/TrussPost.py",
+        "qfem-0001/figures/trussFEM.png",
+        "qfem-0001/figures/trussUQ.png",
+        "qfem-0001/README.rst"
+      ],
+      "entry_point": "qfem-0001/./input.json",
+      "summary": "This example illustrates how quoFEM interacts with the Tcl interpreter for OpenSees. A simple forward propagation procedure is run to estimate the first and second central moments of a FE model's response, given the marginal distributions of various random parameters.",
+      "logo": "figures/truss.png",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0002": {
+      "id": "qfem-0002",
+      "title": "Forward Propagation - OpenSeesPy",
+      "base": "qfem-0002",
+      "doc": [
+        "qfem-0002/qfem-0002.png",
+        "qfem-0002/src/params.py",
+        "qfem-0002/README.rst",
+        "qfem-0002/src/model.py"
+      ],
+      "entry_point": "qfem-0002/./input.json",
+      "summary": "This example illustrates how quoFEM interacts with OpenSeesPy. A simple forward propagation procedure is run to estimate the first and second central moments of a FE model's response, given the marginal distributions of various random parameters.",
+      "logo": "qfem-0002.png",
+      "published": "2020-12-17T21:26:53.946569-08:00",
+      "categories": {
+        "Simulation": "OpenSeesPy",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0003": {
+      "id": "qfem-0003",
+      "title": "Reliability Analysis",
+      "base": "qfem-0003",
+      "doc": [
+        "qfem-0003/qfem-0003.png",
+        "qfem-0003/figures/trussSORM-RES.png",
+        "qfem-0003/README.rst",
+        "qfem-0003/figures/trussGP-RES2.png",
+        "qfem-0003/figures/trussIS-RES2.png",
+        "qfem-0003/figures/trussFORM-RES2.png"
+      ],
+      "entry_point": "qfem-0003/./input.json",
+      "summary": "This example uses quoFEM to perform a second-order reliability analysis (SORM) of an OpenSees FE model.",
+      "logo": "qfem-0003.png",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0004": {
+      "id": "qfem-0004",
+      "title": "Sensitivity Analysis",
+      "base": "qfem-0004",
+      "doc": [
+        "qfem-0004/qfem-0004.png",
+        "qfem-0004/figures/trussSensitivity-RES.png",
+        "qfem-0004/README.rst"
+      ],
+      "entry_point": "qfem-0004/./input.json",
+      "summary": "This example uses quoFEM to perform a global sensitivity analysis of an OpenSees FE model.",
+      "logo": "qfem-0004.png",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0005": {
+      "id": "qfem-0005",
+      "title": "Basic modeling with Python",
+      "base": "qfem-0005",
+      "doc": [
+        "qfem-0005/README.rst",
+        "qfem-0005/qfem-0005.png"
+      ],
+      "entry_point": "qfem-0005/./input.json",
+      "summary": "This example illustrates how Python scripting can be used with quoFEM to express general mathematical models without the use of a dedicated finite element analysis engine.",
+      "logo": "qfem-0005.png",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSeesPy",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0006": {
+      "id": "qfem-0006",
+      "title": "Optimization",
+      "base": "qfem-0006",
+      "doc": [
+        "qfem-0006/README.rst"
+      ],
+      "entry_point": "qfem-0006/./input.json",
+      "summary": "In this example, a **parameter estimation** routine is used to solve a classical optimization problem for which an analytic solution is known.",
+      "logo": "None",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSeesPy",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0007": {
+      "id": "qfem-0007",
+      "title": "Steel Frame: Conventional Calibration",
+      "base": "qfem-0007",
+      "doc": [
+        "qfem-0007/figures/qfem-0007-UQ.png",
+        "qfem-0007/src/fem.tcl",
+    "qfem-0007/src/eigData.csv",
+        "qfem-0007/figures/qfem-0007-RV.png",
+        "qfem-0007/figures/qfem-0007-FEM.png",
+        "qfem-0007/figures/qfem-0007-RES1.png",
+        "qfem-0007/figures/qfem-0007-qfem-0007.png",
+        "qfem-0007/figures/qfem-0007-RES2.png",
+        "qfem-0007/figures/qfem-0007-QoI.png",
+        "qfem-0007/README.rst",
+    "qfem-0007/figures/qfem-0007-NaturalModeShapes.png",
+    "qfem-0007/figures/qfem-0007-SteelStructuralSystem.png"
+      ],
+      "entry_point": "qfem-0007/./input.json",
+      "summary": "In this example, a parameter estimation routine is used to estimate column stiffnesses of a simple steel frame, given data about its mode shapes and mass distribution.",
+      "logo": "figures/qfem-0007.png",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0008": {
+      "id": "qfem-0008",
+      "title": "Steel Frame Calibration with DREAM",
+      "base": "qfem-0008",
+      "doc": [
+        "qfem-0008/qfem-0008.png",
+        "qfem-0008/README.rst"
+      ],
+      "entry_point": "qfem-0008/./input.json",
+      "summary": "In this example, Bayesian estimation is used to estimate column stiffnesses of a simple steel frame, given data about its mode shapes and mass distribution.",
+      "logo": "qfem-0008.png",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0009": {
+      "id": "qfem-0009",
+      "title": "Two-Dimensional Truss: Global Sensitivity Analysis using SimCenterUQ Engine",
+      "base": "qfem-0009",
+      "doc": [
+        "qfem-0009/figures/qfem-0009.png",
+        "qfem-0009/figures/trussPDF.png",
+        "qfem-0009/README.rst",
+        "qfem-0009/figures/trussSensitivity-RES-SimUQ.png",
+        "qfem-0009/figures/trussSensitivity-advanced.png",
+        "qfem-0009/figures/trussSensitivity-input-SimUQ.png",
+        "qfem-0009/./qfem-0009.png",
+        "qfem-0009/figures/trussSensitivity-corr.png",
+        "qfem-0009/figures/trussSensitivity-RES-SimUQ2.png"
+      ],
+      "entry_point": "qfem-0009/./input.json",
+      "summary": "A global sensitivity analysis is conducted with correlated random variables using the SimCenterUQ engine for sensitivity analysis.",
+      "logo": "figures/qfem-0009.png",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0010": {
+      "id": "qfem-0010",
+      "title": "Forward Propagation - FEAP",
+      "base": "qfem-0010",
+      "doc": [
+        "qfem-0010/README.rst"
+      ],
+      "entry_point": "qfem-0010/./input.json",
+      "summary": "This example illustrates how quoFEM interacts with the FEAP engine for finite element analysis. A simple forward propagation procedure is run to estimate the first and second central moments of a truss model's response, given the marginal distributions of various random parameters.",
+      "logo": "None",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "FEAPpv",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0011": {
+      "id": "qfem-0011",
+      "title": "exampleBayesianCalibration",
+      "base": "qfem-0011",
+      "doc": [
+        "qfem-0011/README.rst"
+      ],
+      "entry_point": "qfem-0011/./input.json",
+      "summary": "~",
+      "logo": "None",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0012": {
+      "id": "qfem-0012",
+      "title": "exampleCalibration",
+      "base": "qfem-0012",
+      "doc": [
+        "qfem-0012/README.rst"
+      ],
+      "entry_point": "qfem-0012/./input.json",
+      "summary": "~",
+      "logo": "None",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0013": {
+      "id": "qfem-0013",
+      "title": "Shear wall calibration",
+      "base": "qfem-0013",
+      "doc": [
+        "qfem-0013/README.rst"
+      ],
+      "entry_point": "qfem-0013/./input.json",
+      "summary": "~",
+      "logo": "None",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0014": {
+      "id": "qfem-0014",
+      "title": "Steel Frame: Bayesian Calibration using TMCMC",
+      "base": "qfem-0014",
+      "doc": [
+        "qfem-0014/figures/qfem-0014-UQ.png",
+        "qfem-0014/figures/qfem-0014-FEM.png",
+        "qfem-0014/figures/qfem-0014-RV.png",
+        "qfem-0014/figures/qfem-0014-QoI.png",
+    "qfem-0014/figures/qfem-0014-RES1.png",
+        "qfem-0014/figures/qfem-0014-RES2.png",
+        "qfem-0014/figures/qfem-0014-RES3.png",
+    "qfem-0014/figures/qfem-0014-RES4.png",
+    "qfem-0014/figures/qfem-0014-RES5.png",
+    "qfem-0014/figures/qfem-0014-RES6.png",
+        "qfem-0014/figures/qfem-0014.png",
+        "qfem-0014/README.rst",
+    "qfem-0014/figures/qfem-0014-NaturalModeShapes.png",
+    "qfem-0014/figures/qfem-0014-SteelStructuralSystem.png",
+    "qfem-0014/src/eigData.csv",
+    "qfem-0014/src/model.tcl"
+      ],
+      "entry_point": "qfem-0014/./input.json",
+      "summary": "In this example, Bayesian estimation is used to estimate the lateral story stiffnesses of the two stories of a simple steel frame, given data about its mode shapes and frequencies. The transitional Markov chain Monte Carlo algorithm is used to obtain samples from the posterior probability distribution of the lateral story stiffnesses",
+      "logo": "qfem-0014.png",
+      "published": "2020-12-17T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0015": {
+      "id": "qfem-0015",
+      "title": "Surrogate Modeling for One Story Building Earthquake Response",
+      "base": "qfem-0015",
+      "doc": [
+        "qfem-0015/README.rst",
+        "qfem-0015/figures/SUR-UQtab2.png",
+        "qfem-0015/figures/SUR-REStab2nd1.png",
+        "qfem-0015/figures/SUR-REStab1st1.png",
+        "qfem-0015/figures/SUR-RVtab.png",
+        "qfem-0015/figures/SUR-QoItab.png",
+        "qfem-0015/figures/SUR-FEMtab.png",
+        "qfem-0015/figures/SUR-UQtab1.png",
+        "qfem-0015/figures/SUR-GM.PNG",
+        "qfem-0015/figures/SUR-VER2.png",
+        "qfem-0015/figures/SUR-VER4.png",
+        "qfem-0015/figures/SUR-REStab3.png",
+        "qfem-0015/figures/SUR-VER6.png",
+        "qfem-0015/figures/SUR-VER7.png",
+        "qfem-0015/figures/SUR-VER5.png",
+        "qfem-0015/figures/SUR-VER3.png",
+        "qfem-0015/figures/SUR-REStab1st2.png",
+        "qfem-0015/figures/SUR-REStab2nd2.png",
+        "qfem-0015/figures/SUR-Concept.PNG",
+        "qfem-0015/figures/SUR-VER1.png"
+      ],
+      "entry_point": "qfem-0015/./input.json",
+      "summary": "This example constructs a Gaussian process-based surrogate model for the response of a building structure given a ground motion time history. We are interested in the maximum inter-story drift/acceleration response determined in 14 structural parameters.",
+      "logo": "figures/SUR-Concept.PNG",
+      "published": "2021-03-12T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSeesPy",
+        "Difficulty": "1"
+      }
+    },
+    "qfem-0016": {
+      "id": "qfem-0016",
+      "title": "Surrogate Modeling to Predict Mean and Variance of Earthquake Response",
+      "base": "qfem-0016",
+      "doc": [
+        "qfem-0016/figures/SUR2-REStab2.png",
+        "qfem-0016/figures/SUR2-VER1.png",
+        "qfem-0016/figures/SUR2-sturcture.PNG",
+        "qfem-0016/README.rst",
+        "qfem-0016/figures/SUR2-RVtab.png",
+        "qfem-0016/figures/SUR2-VER3.png",
+        "qfem-0016/figures/SUR2-VER4.png",
+        "qfem-0016/figures/SUR2-VER2.png",
+        "qfem-0016/figures/SUR2-VER5.png",
+        "qfem-0016/figures/SUR2-QoItab.png",
+        "qfem-0016/figures/SUR2-VER6.png",
+        "qfem-0016/figures/SUR2-REStab1.png",
+        "qfem-0016/figures/SUR2-FEMtab.png",
+        "qfem-0016/figures/SUR2-UQtab.png",
+        "qfem-0016/figures/SUR2-VER0.png"
+      ],
+      "entry_point": "qfem-0016/./input.json",
+      "summary": "This example constructs a Gaussian process-based surrogate model for the mean and variance of peak building responses subjected to ten different ground motions. The 2nd floor response of a six-story shear building model is investigated.",
+      "logo": "figures/SUR2-sturcture.PNG",
+      "published": "2021-03-12T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "1"
+      }
+    },
+    "qfem-0017": {
+      "id": "qfem-0017",
+      "title": "Custom UQ for UQpy",
+      "base": "qfem-0017",
+      "doc": [
+        "qfem-0017/README.rst",
+        "qfem-0017/figures/qfem-0017.png",
+        "qfem-0017/figures/CUS_REStab.png",
+        "qfem-0017/figures/CUS_QoItab.png",
+        "qfem-0017/figures/CUS_RVtab.png",
+        "qfem-0017/src/UQpySimpleExample.json",
+        "qfem-0017/figures/CUS_UQtab.png",
+        "qfem-0017/figures/CUS_UQtab2.png",
+        "qfem-0017/figures/CUS_UQtab3.png",
+        "qfem-0017/figures/CUS_FEMtab.png"
+      ],
+      "entry_point": "qfem-0017/./input.json",
+      "summary": "This example illustrates how a third-party UQ engine can be used with quoFEM.",
+      "logo": "figures/qfem-0017.png",
+      "published": "2021-03-12T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "2"
+      }
+    },
+    "qfem-0018": {
+      "id": "qfem-0018",
+      "title": "Deterministic Calibration of Material Model Parameters",
+      "base": "qfem-0018",
+      "doc": [
+        "qfem-0018/figures/qf-0018-StressResults.png",
+        "qfem-0018/figures/qf-0018-DeterministicCalibrationResults.png",
+        "qfem-0018/figures/qf-0018-RV.png",
+        "qfem-0018/figures/qf-0018-UQ.png",
+        "qfem-0018/figures/qf-0018-QOI.png",
+        "qfem-0018/figures/qf-0018-RES2.png",
+        "qfem-0018/README.rst",
+        "qfem-0018/figures/qf-0018-StrainHistory.png",
+        "qfem-0018/figures/qf-0018-RES1.png",
+        "qfem-0018/figures/qf-0018-FEM.png"
+      ],
+      "entry_point": "qfem-0018/./input.json",
+      "summary": "In this example, the parameters of the STEEL02 material model in OpenSees\nare calibrated using non-linear least squares optimization. Experimental data is\npassed in to quoFEM from an external file, and the output is the time-history of\nstress - a non-scalar response quantity.\n",
+      "logo": "figures/qf-0018-StrainHistory.png",
+      "published": "2021-07-01T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0019": {
+      "id": "qfem-0019",
+      "title": "Bayesian Calibration of Material Model Parameters",
+      "base": "qfem-0019",
+      "doc": [
+    "qfem-0019/README.rst",
+    "qfem-0019/src/matTestAllParamsReadStrain.tcl",
+    "qfem-0019/src/stress.1.coords",
+    "qfem-0019/src/calDataField.csv",
+    "qfem-0019/figures/qf-0019-UQ.png",
+    "qfem-0019/figures/qf-0019-FEM.png",
+    "qfem-0019/figures/qf-0019-RV.png",
+        "qfem-0019/figures/qf-0019-QOI.png",
+        "qfem-0019/figures/qf-0019-RES1.png",
+        "qfem-0019/figures/qf-0019-RES2.png",
+        "qfem-0019/figures/qf-0019-StressResults.png",
+        "qfem-0019/figures/qf-0019-DeterministicCalibrationResults.png",
+        "qfem-0019/figures/qf-0019-StressStrainData.png",
+    "qfem-0019/figures/qf-0019-StrainHistory.png",
+    "qfem-0019/figures/qf-0019-StressHistory.png",
+    "qfem-0019/figures/qf-0018-UQ.png",
+    "qfem-0019/figures/qf-0018-FEM.png",
+    "qfem-0019/figures/qf-0018-RV.png",
+        "qfem-0019/figures/qf-0018-QOI.png",
+        "qfem-0019/figures/qf-0018-RES1.png"
+      ],
+      "entry_point": "qfem-0019/./input.json",
+      "summary": "In this example, the parameters of the STEEL02 material model in OpenSees\nare calibrated by Bayesian inference. Experimental data is\npassed in to quoFEM from an external file, and the output is the time-history of\nstress - a non-scalar response quantity.\n",
+      "logo": "figures/qf-0019-StressResults.png",
+      "published": "2021-07-01T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0022": {
+      "id": "qfem-0022",
+      "title": "Two-Dimensional Truss: PLoM Modeling and Simulation",
+      "base": "qfem-0022",
+      "doc": [
+    "qfem-0022/README.rst",
+    "qfem-0022/src/input.tcl",
+    "qfem-0022/src/TrussModel.tcl",
+    "qfem-0022/src/TrussPost.tcl",
+    "qfem-0022/src/TrussPost.py",
+    "qfem-0022/figures/truss.png",
+    "qfem-0022/figures/UQ.png",
+    "qfem-0022/figures/FEM.png",
+    "qfem-0022/figures/RV.png",
+    "qfem-0022/figures/EDP.png",
+    "qfem-0022/figures/RES1.png",
+    "qfem-0022/figures/RES2.png",
+    "qfem-0022/figures/RES3.png",
+    "qfem-0022/figures/RES4.png"
+      ],
+      "entry_point": "qfem-0022/./input.json",
+      "summary": "In this example, the goal is to demonstrate the use of PLoM model method \nto predict the response of the example truss under the given load.\n",
+      "logo": "figures/truss.png",
+      "published": "2022-04-01T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0023": {
+      "id": "qfem-0023",
+      "title": "Global Sensitivity Analysis for Field QoI",
+      "base": "qfem-0023",
+      "doc": [
+        "qfem-0023/README.rst",
+        "qfem-0023/src/matTestAllParamsReadStrain.tcl",
+        "qfem-0023/src/stress.1.coords",
+        "qfem-0023/figures/qf-0023-UQ.png",
+        "qfem-0023/figures/qf-0023-FEM.png",
+        "qfem-0023/figures/qf-0023-RV.png",
+        "qfem-0023/figures/qf-0023-QOI.png",
+        "qfem-0023/figures/qf-0023-RES1.png",
+        "qfem-0023/figures/qf-0023-RES2.png",
+        "qfem-0023/figures/qf-0023-RES3.png",
+        "qfem-0023/figures/qf-0023-RES4.png",
+        "qfem-0023/figures/qf-0023-Steel02.png",
+        "qfem-0023/figures/qf-0023-StrainHistory.png"
+      ],
+      "entry_point": "qfem-0023/./input.json",
+      "summary": "In this example, global sensitivity analysis is demonstrated for field QoI quantities. To gain efficiency dealing with high-dimension outputs, principal component analysis and probability model-based global sensitivity analysis (PCA-PSA) method is used in the analysis.",
+      "logo": "qfem-0023/figures/qf-0023-StrainHistory.png",
+      "published": "2022-06-30T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0025": {
+      "id": "qfem-0025",
+      "title": "Heteroscedastic Gaussian Process",
+      "base": "qfem-0025",
+      "doc": [
+        "qfem-0025/README.rst",
+        "qfem-0025/src/rosenbrock.py",
+        "qfem-0025/src/params.py",
+        "qfem-0025/figures/qf-0025-data.png",
+        "qfem-0025/figures/qf-0025-UQ.png",
+        "qfem-0025/figures/qf-0025-FEM.png",
+        "qfem-0025/figures/qf-0025-EDP.png",
+        "qfem-0025/figures/qf-0025-RV.png",
+        "qfem-0025/figures/qf-0025-RES1.png",
+        "qfem-0025/figures/qf-0025-RES2.png",
+        "qfem-0025/figures/qf-0025-RES3.png",
+        "qfem-0025/figures/qf-0025-main.png"
+      ],
+      "entry_point": "qfem-0025/./input.json",
+      "summary": "The Heteroscedastic Gaussian process model is trained based on partial replication strategy",
+      "logo": "qfem-0025/figures/qf-0025-main.png",
+      "published": "2022-06-30T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSeesPy",
+        "Difficulty": "0"
+      }
+    },
+    "qfem-0027": {
+      "id": "qfem-0027",
+      "title": "Forward Propagation with Multiple FE Models",
+      "base": "qfem-0027",
+      "doc": [
+        "qfem-0027/README.rst",
+        "qfem-0027/src/model1/ShearBuilding_NL_1.tcl",
+        "qfem-0027/src/model1/create_model_1.tcl",
+        "qfem-0027/src/model1/run_analysis.tcl",
+        "qfem-0027/src/model1/postprocess.tcl",
+        "qfem-0027/src/model1/R331.dat",
+        "qfem-0027/src/model2/ShearBuilding_NL_2.tcl",
+        "qfem-0027/src/model2/create_model_2.tcl",
+        "qfem-0027/src/model2/run_analysis.tcl",
+        "qfem-0027/src/model2/postprocess.tcl",
+        "qfem-0027/src/model2/R331.dat",
+        "qfem-0027/figures/UQ.png",
+        "qfem-0027/figures/FEM1.png",
+        "qfem-0027/figures/FEM2.png",
+        "qfem-0027/figures/RV.png",
+        "qfem-0027/figures/EDP.png",
+        "qfem-0027/figures/RES1.png",
+        "qfem-0027/figures/RES2.png",
+        "qfem-0027/figures/RES3.png",
+        "qfem-0027/figures/RES4.png",
+        "qfem-0027/figures/RES5.png",
+        "qfem-0027/figures/RES6.png",
+        "qfem-0027/figures/RES7.png"
+      ],
+      "entry_point": "qfem-0027/input.json",
+      "summary": "In this example, two finite element models of a 6-story structure are used to predict the maximum base shear by conducting a nonlinear time history analysis of the structure subjected to seismic excitation.",
+      "logo": "qfem-0027/figures/main.png",
+      "published": "2022-06-30T21:26:53.946381-08:00",
+      "categories": {
+        "Simulation": "OpenSees",
+        "Difficulty": "0"
+      }
+    }
+  },
+  "categories": {
+    "Simulation": {
+      "OpenSees": "OpenSees",
+      "OpenSeesPy": "OpenSeesPy",
+      "FEAPpv": "FEAP",
+      "None": "-"
+    },
+    "Difficulty": {
+      "0": "Beginner",
+      "1": "Intermediate",
+      "2": "Advanced"
+    }
+  }
+}

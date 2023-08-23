@@ -1,0 +1,206 @@
+{
+    "Applications": {
+        "FEM": {
+            "Application": "OpenSeesPy",
+            "ApplicationData": {
+                "MS_Path": "{Current_Dir}/.",
+                "PA_Path": "{Current_Dir}/.",
+                "mainScript": "CWH.py",
+                "parametersScript": "params.py",
+                "postprocessScript": ""
+            }
+        },
+        "UQ": {
+            "Application": "SimCenter-UQ",
+            "ApplicationData": {
+            }
+        }
+    },
+    "EDP": [
+        {
+            "length": 1,
+            "name": "InterstoryDrift_x",
+            "type": "scalar"
+        },
+        {
+            "length": 1,
+            "name": "Accel_Roof_x",
+            "type": "scalar"
+        }
+    ],
+    "FEM": {
+    },
+    "UQ": {
+        "surrogateMethodInfo": {
+            "DoEmethod": "None",
+            "accuracyLimit": 0.02,
+            "advancedOpt": true,
+            "existingDoE": false,
+            "initialDoE": 0,
+            "inpFile": "NA",
+            "kernel": "Matern 5/2",
+            "linear": false,
+            "logTransform": false,
+            "method": "Sampling and Simulation",
+            "nuggetOpt": "Optimize",
+            "nuggetString": "",
+            "outFile": "NA",
+            "parallelExecution": true,
+            "samples": 150,
+            "seed": 71,
+            "timeLimit": 20
+        },
+        "uqEngine": "SimCenterUQ",
+        "uqType": "Train GP Surrogate Model"
+    },
+    "isSurrogate": false,
+    "localAppDir": "C:/Users/SimCenter/Sangri/SimCenterBackendApplications",
+    "randomVariables": [
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.2,
+            "name": "materialQuality",
+            "refCount": 4,
+            "upperbound": 1,
+            "value": "RV.materialQuality",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 800,
+            "name": "planArea",
+            "refCount": 4,
+            "upperbound": 2400,
+            "value": "RV.planArea",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.4,
+            "name": "aspectRatio",
+            "refCount": 4,
+            "upperbound": 0.8,
+            "value": "RV.aspectRatio",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.02,
+            "name": "damping",
+            "refCount": 4,
+            "upperbound": 0.1,
+            "value": "RV.damping",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.5,
+            "name": "extDensity_x",
+            "refCount": 4,
+            "upperbound": 0.8,
+            "value": "RV.extDensity_x",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.5,
+            "name": "extDensity_z",
+            "refCount": 4,
+            "upperbound": 0.8,
+            "value": "RV.extDensity_z",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.06,
+            "name": "intDensity",
+            "refCount": 4,
+            "upperbound": 0.08,
+            "value": "RV.intDensity",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.05,
+            "name": "extEcc_x",
+            "refCount": 4,
+            "upperbound": 0.5,
+            "value": "RV.extEcc_x",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.05,
+            "name": "extEcc_z",
+            "refCount": 4,
+            "upperbound": 0.5,
+            "value": "RV.extEcc_z",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.05,
+            "name": "intEcc_x",
+            "refCount": 4,
+            "upperbound": 0.5,
+            "value": "RV.intEcc_x",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 0.05,
+            "name": "intEcc_z",
+            "refCount": 4,
+            "upperbound": 0.5,
+            "value": "RV.intEcc_z",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 10,
+            "name": "floor1Weight",
+            "refCount": 4,
+            "upperbound": 15.5,
+            "value": "RV.floor1Weight",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 10,
+            "name": "floor2Weight",
+            "refCount": 4,
+            "upperbound": 15.5,
+            "value": "RV.floor2Weight",
+            "variableClass": "Uniform"
+        },
+        {
+            "distribution": "Uniform",
+            "inputType": "Parameters",
+            "lowerbound": 10,
+            "name": "roofWeight",
+            "refCount": 4,
+            "upperbound": 15.5,
+            "value": "RV.roofWeight",
+            "variableClass": "Uniform"
+        }
+    ],
+    "remoteAppDir": "C:/Users/SimCenter/Sangri/SimCenterBackendApplications",
+    "resultType": "SimCenterUQResultsSampling",
+    "runType": "runningLocal",
+    "summary": [
+    ],
+    "workingDir": "C:/Users/SimCenter/Documents/quoFEM/LocalWorkDir"
+}

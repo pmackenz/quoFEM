@@ -1,0 +1,60 @@
+{
+    "UQ": {
+        "calibrationMethodData": {
+            "convergenceTol": 1e-10,
+            "factors": "",
+            "maxIterations": 1000,
+            "method": "NL2SOL",
+	        "calibrationDataFile": "{Current_Dir}/eigData.csv"
+        },
+        "uqEngine": "Dakota",
+        "uqType": "Parameters Estimation"
+    },
+    "randomVariables": [
+        {
+            "name": "Ic1",
+            "distribution": "ContinuousDesign",
+            "title": "first story column moment of inertia",
+            "initialpoint": 1500.0,
+            "lowerbound": 500.0,
+            "refCount": 2,
+            "upperbound": 2000.0,
+            "value": "RV.Ic1",
+            "variableClass": "Design"
+        },
+        {
+            "name": "Ic2",
+            "distribution": "ContinuousDesign",
+            "title": "second story column moment of inertia",
+            "initialpoint": 500.0,
+            "lowerbound": 500.0,
+            "refCount": 2,
+            "upperbound": 2000.0,
+            "value": "RV.Ic2",
+            "variableClass": "Design"
+        }
+    ],
+    "EDP": [
+        {
+            "name": "lambda"
+        },
+        {
+            "name": "phi"
+        }
+    ],
+    "$schema": "https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json",
+    "Applications": {
+        "UQ": {
+            "Application": "Dakota-UQ",
+            "ApplicationData": {}
+        },
+        "FEM": {
+            "Application": "OpenSees",
+            "ApplicationData": {
+		"MS_Path": "{Current_Dir}/",
+		"mainScript": "fem.tcl",
+		"postprocessScript": ""
+	    }
+        }		
+    }
+}

@@ -48,6 +48,19 @@ uqFEM.pro.user
 
 # build folder
 applications/out/build/*
+backend/applications/
+backend/build/
+
+# .DS_Store files on Mac
+*.DS_Store
+
+# .idea/ files from PyCharm IDE
+*.idea/
+
+# Pycache files
+*__pycache__
+
+build/
 
 Makefile
 *.pro.user
@@ -60,3 +73,14 @@ nataf_gsa
 preprocessDakota
 
 .vs/
+backend/applications
+backend/build
+applications/build
+applications/applications
+
+
+*Doxyfile
+*/html/
+*/latex/
+
+*.vscode

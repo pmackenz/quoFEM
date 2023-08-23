@@ -1,0 +1,6 @@
+summary: This example illustrates how Python scripting can be used with quoFEM to
+  express general mathematical models without the use of a dedicated finite element
+  analysis engine.
+
+collection-title: Rosenbrock
+difficulty: 0

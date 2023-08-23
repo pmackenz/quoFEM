@@ -1,0 +1,8 @@
+summary: This example constructs a Gaussian process-based surrogate model for the response of a building structure given a ground motion time history. We are interested in the maximum inter-story drift/acceleration response determined in 14 structural parameters.
+
+author:
+- family: Yi
+  given: Sangri
+collection-title: Surrogate training - building
+
+difficulty: 1

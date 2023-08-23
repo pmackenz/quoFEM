@@ -1,0 +1,61 @@
+{
+    "UQ": {
+        "bayesianCalibrationMethodData": {
+            "burnInSamples": 0,
+			"calibrationDataFile": "{Current_Dir}/eigData.csv",
+            "chainSamples": 100,
+            "chains": 4,
+            "jumpStep": 5,
+            "method": "DREAM",
+            "seed": 107
+        },
+	"parallelExecution": true,
+        "uqEngine": "Dakota",
+        "uqType": "Inverse Problem"
+    },
+    "randomVariables": [
+        {
+            "name": "Ic1",
+            "distribution": "Uniform",
+            "title": "first story column moment of inertia",
+            "lowerbound": 500.0,
+            "refCount": 2,
+            "upperbound": 2000.0,
+            "value": "RV.Ic1",
+            "variableClass": "Uncertain"
+        },
+        {
+            "name": "Ic2",
+            "distribution": "Uniform",
+            "title": "second story column moment of inertia",
+            "lowerbound": 500.0,
+            "refCount": 2,
+            "upperbound": 2000.0,
+            "value": "RV.Ic2",
+            "variableClass": "Uncertain"
+        }
+    ],
+    "EDP": [
+        {
+            "name": "lambda"
+        },
+        {
+            "name": "phi"
+        }
+    ],
+    "$schema": "https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json",
+    "Applications": {
+        "UQ": {
+            "Application": "Dakota-UQ",
+            "ApplicationData": {}
+        },
+        "FEM": {
+            "Application": "OpenSees",
+            "ApplicationData": {
+		"MS_Path": "{Current_Dir}/",
+		"mainScript": "fem.tcl",
+		"postprocessScript": ""
+	    }
+        }	
+    }
+}
