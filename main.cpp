@@ -51,6 +51,7 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #include <WorkflowCLI.h>
 #include <GoogleAnalytics.h>
 #include <AgaveCurl.h>
+#include <QWebEngineView>
 
  // customMessgaeOutput code from web:
  // https://stackoverflow.com/questions/4954140/how-to-redirect-qdebug-qwarning-qcritical-etc-output
@@ -98,7 +99,7 @@ int main(int argc, char *argv[])
     //Setting Core Application Name, Organization, and Version
     QCoreApplication::setApplicationName("quoFEM");
     QCoreApplication::setOrganizationName("SimCenter");
-    QCoreApplication::setApplicationVersion("3.3.4");
+    QCoreApplication::setApplicationVersion("3.4.0");
 
     //
     // set up logging of output messages for user debugging
@@ -149,11 +150,6 @@ int main(int argc, char *argv[])
 
   QApplication app(argc, argv);
 
-    //Setting Google Analytics Tracking Information
-  //    GoogleAnalytics::SetMeasurementId("G-7P3PV7SM6J");
-    GoogleAnalytics::SetAPISecret("UxuZgMQaS7aoqpQskrcG9w");
-    GoogleAnalytics::CreateSessionId();
-    GoogleAnalytics::StartSession();
 
     //
     // create a remote interface
@@ -181,7 +177,7 @@ int main(int argc, char *argv[])
 
     QString version = QString("Version ") + QCoreApplication::applicationVersion();
     w.setVersion(version);
-QString citeText = QString("1) Frank McKenna, Sang-ri Yi, Aakash Bangalore Satish, Adam Zsarnoczay, Michael Gardner, & Wael Elhaddad. (2023). NHERI-SimCenter/quoFEM: Version Version 3.3.0 (v3.3.0). Zenodo. https://doi.org/10.5281/zenodo.7786857 3.2.0 (v3.2.0). \n\n2) Gregory G. Deierlein, Frank McKenna, Adam Zsarnóczay, Tracy Kijewski-Correa, Ahsan Kareem, Wael Elhaddad, Laura Lowes, Matt J. Schoettler, and Sanjay Govindjee (2020) A Cloud-Enabled Application Framework for Simulating Regional-Scale Impacts of Natural Hazards on the Built Environment. Frontiers in the Built Environment. 6:558706. doi: 10.3389/fbuil.2020.558706");
+QString citeText = QString("1) Frank McKenna, Sang-ri Yi, Aakash Bangalore Satish, Adam Zsarnoczay, Michael Gardner, nickberkeley, Michael Gardner, & Wael Elhaddad. (2023). NHERI-SimCenter/quoFEM: Version 3.4.0 (v3.4.0). Zenodo. https://doi.org/10.5281/zenodo.8400732 \n\n2) Gregory G. Deierlein, Frank McKenna, Adam Zsarnóczay, Tracy Kijewski-Correa, Ahsan Kareem, Wael Elhaddad, Laura Lowes, Matt J. Schoettler, and Sanjay Govindjee (2020) A Cloud-Enabled Application Framework for Simulating Regional-Scale Impacts of Natural Hazards on the Built Environment. Frontiers in the Built Environment. 6:558706. doi: 10.3389/fbuil.2020.558706");
   
     w.setCite(citeText);
 
@@ -191,6 +187,8 @@ QString citeText = QString("1) Frank McKenna, Sang-ri Yi, Aakash Bangalore Satis
     QString messageBoardURL("https://simcenter-messageboard.designsafe-ci.org/smf/index.php?board=4.0");
     w.setFeedbackURL(messageBoardURL);
 
+
+    
     if (argc > 1) {
       logToFile = true;
       WorkflowCLI cli(&w, theInputApp);
@@ -219,8 +217,8 @@ QString citeText = QString("1) Frank McKenna, Sang-ri Yi, Aakash Bangalore Satis
 
     w.show();
     w.statusBar()->showMessage("Ready", 5000);
-    
-  // load style sheet
+
+    // load style sheet
 
 #ifdef Q_OS_WIN
     QFile file(":/styleCommon/stylesheetWIN.qss");
@@ -241,6 +239,20 @@ QString citeText = QString("1) Frank McKenna, Sang-ri Yi, Aakash Bangalore Satis
       qDebug() << "could not open stylesheet";
   }
 
+  //Setting Google Analytics Tracking Information
+  GoogleAnalytics::SetMeasurementId("G-7P3PV7SM6J");
+  GoogleAnalytics::SetAPISecret("UxuZgMQaS7aoqpQskrcG9w");
+  GoogleAnalytics::CreateSessionId();
+  GoogleAnalytics::StartSession();
+
+  // Opening a QWebEngineView and using github to get app geographic usage
+  QWebEngineView view;
+  view.setUrl(QUrl("https://nheri-simcenter.github.io/quoFEM/GA4.html"));
+  view.resize(1024, 750);
+  view.show();
+  view.hide();
+  /* ******************************************************************** */
+  
   //
   // exe application event-loop
   //
