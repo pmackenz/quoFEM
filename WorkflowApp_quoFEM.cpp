@@ -104,16 +104,16 @@ WorkflowApp_quoFEM::WorkflowApp_quoFEM(RemoteService *theService, QWidget *paren
     // create the various widgets
     //
 
-    theRVs = RandomVariablesContainer::getInstance();
+    theRVs           = RandomVariablesContainer::getInstance();
     theFEM_Selection = new FEM_Selection(true);
-    theUQ_Selection = new UQ_EngineSelection();
-    theEDPs = new InputWidgetEDP();
+    theUQ_Selection  = new UQ_EngineSelection();
+    theEDPs          = new InputWidgetEDP();
 
     //theResults = new DakotaResultsSampling(theRVs);
-    theResults = theUQ_Selection->getResults();
+    theResults       = theUQ_Selection->getResults();
 
-    localApp = new LocalApplication("qWHALE.py");
-    remoteApp = new RemoteApplication("qWHALE.py", theService);
+    localApp         = new LocalApplication("qWHALE.py");
+    remoteApp        = new RemoteApplication("qWHALE.py", theService);
 
     //    localApp = new LocalApplication("EE-UQ workflow.py");
     //   remoteApp = new RemoteApplication("EE-UQ workflow.py", theService);
@@ -179,7 +179,7 @@ WorkflowApp_quoFEM::WorkflowApp_quoFEM(RemoteService *theService, QWidget *paren
     theComponentSelection->addComponent(QString("UQ"),  theUQ_Selection);
     theComponentSelection->addComponent(QString("FEM"), theFEM_Selection);
     theComponentSelection->addComponent(QString("RV"),  theRVs);
-    theComponentSelection->addComponent(QString("EDP"),  theEDPs);    
+    theComponentSelection->addComponent(QString("EDP"), theEDPs);
     theComponentSelection->addComponent(QString("RES"), theResults);
 
     theComponentSelection->displayComponent("UQ");
@@ -535,3 +535,10 @@ WorkflowApp_quoFEM::getMaxNumParallelTasks() {
     return theUQ_Selection->getNumParallelTasks();
 }
 
+
+
+QString
+WorkflowApp_quoFEM::currentComponentSelectionName(void)
+{
+    return theComponentSelection->selectedComponentWidgetName();
+}

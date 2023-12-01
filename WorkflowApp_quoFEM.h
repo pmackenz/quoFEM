@@ -76,6 +76,8 @@ public:
     void onRemoteGetButtonClicked();
     void onExitButtonClicked();
     int  getMaxNumParallelTasks();
+
+    QString currentComponentSelectionName(void);
     
 signals:
     void setUpForApplicationRunDone(QString &tmpDirectory, QString &inputFile);

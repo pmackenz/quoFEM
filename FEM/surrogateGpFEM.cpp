@@ -62,6 +62,7 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 surrogateGpFEM::surrogateGpFEM(QWidget *parent)
   : SimCenterAppWidget(parent)
 {
+    this->m_widgetClassName = QString("surrogateGpFEM");
 
     QGridLayout *layout = new QGridLayout();
 

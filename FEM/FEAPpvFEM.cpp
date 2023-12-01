@@ -61,6 +61,7 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 FEAPpvFEM::FEAPpvFEM(QWidget *parent)
   : SimCenterAppWidget(parent)
 {
+    this->m_widgetClassName = QString("FEAPpvFEM");
 
     QGridLayout *layout = new QGridLayout();
 

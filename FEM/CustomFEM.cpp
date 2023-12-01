@@ -61,6 +61,7 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 CustomFEM::CustomFEM(QWidget *parent)
   : SimCenterAppWidget(parent)
 {
+    this->m_widgetClassName = QString("CustomFEM");
 
     QVBoxLayout *customLayout = new QVBoxLayout();
 

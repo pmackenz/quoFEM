@@ -62,6 +62,7 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 OpenSeesFEM::OpenSeesFEM(QWidget *parent)
   : SimCenterAppWidget(parent)
 {
+    this->m_widgetClassName = QString("OpenSeesFEM");
 
     QGridLayout *layout = new QGridLayout();
 
